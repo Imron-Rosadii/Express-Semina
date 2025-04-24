@@ -8,7 +8,10 @@ const app = express();
 // routes
 const categoriesRouter = require("./app/api/v1/categories/router");
 const imagesRouter = require("./app/api/v1/images/router");
-
+const talentsRouter = require("./app/api/v1/talents/router");
+const eventsRouter = require("./app/api/v1/events/router");
+const OrganizersRouter = require("./app/api/v1/organizers/router");
+const authRouter = require("./app/api/v1/auth/router");
 const v1 = "/api/v1/cms";
 
 const notFoundMiddleware = require("./app/middlewares/not-found");
@@ -28,6 +31,10 @@ app.get("/", (req, res) => {
 
 app.use(v1, categoriesRouter);
 app.use(v1, imagesRouter);
+app.use(v1, talentsRouter);
+app.use(v1, eventsRouter);
+app.use(v1, OrganizersRouter);
+app.use(v1, authRouter);
 
 app.use(notFoundMiddleware);
 app.use(handlerErrorMiddleware);

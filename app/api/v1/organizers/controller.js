@@ -1,6 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-
-const { createOrganizer } = require("../../../service/mongoose/users");
+const { createOrganizer, createUsers } = require("../../../service/mongoose/users");
 
 const createCMSOrganizers = async (req, res, next) => {
   try {
@@ -14,4 +13,16 @@ const createCMSOrganizers = async (req, res, next) => {
   }
 };
 
-module.exports = { createCMSOrganizers };
+const createCMSUser = async (req, res, next) => {
+  try {
+    const result = await createUsers(req);
+    res.status(StatusCodes.CREATED).json({
+      message: "User berhasil ditambahkan",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { createCMSOrganizers, createCMSUser };
